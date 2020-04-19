@@ -1,11 +1,17 @@
 package wf
 
 import (
-	//"go.uber.org/cadence/activity"
+	"go.uber.org/cadence/activity"
 	"go.uber.org/cadence/workflow"
 	"math/rand"
 	"time"
 )
+
+func init () {
+	activity.Register(InfoStruct)
+	activity.Register(InfoStructResult)
+	workflow.Register(InfWorkFlow)
+}
 
 type InfoData struct {
 	Data string
@@ -33,7 +39,6 @@ func InfoStructResult (info *InfoData) (string, error){
 	}
 	return "Fail", nil
 }
-
 
 func InfWorkFlow (ctx workflow.Context, Data string) (error) {
 
